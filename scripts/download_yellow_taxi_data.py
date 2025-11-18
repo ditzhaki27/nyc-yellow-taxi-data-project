@@ -1,15 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 # Import necessary Libraries
 import os
 import requests
-
-
-# In[ ]:
 
 
 # Base URL for NYC TLC Yellow Taxi trip data
@@ -18,9 +12,6 @@ base_url = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_{}-{
 # Year and months to download (focusing on the first 3 months of the year)
 year = 2025
 months = ["01", "02", "03"]  # Jan, Feb, Mar
-
-
-# In[ ]:
 
 
 # Local folder structure
@@ -40,10 +31,6 @@ def download_file(url, save_path):
     except Exception as e:
         print(f"EXCEPTION: Error downloading {url} -> {e}")
 
-
-# In[ ]:
-
-
 # Download files for Jan–Mar 2025
 for month in months:
     file_name = f"yellow_tripdata_{year}-{month}.parquet"
@@ -52,4 +39,3 @@ for month in months:
     download_file(url, save_path)
 
 print(f"All files saved in: {folder_path}")
-
