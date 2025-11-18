@@ -1,4 +1,4 @@
-# Import necessary Libraries\n",
+# Import necessary Libraries
 import os
 import requests
 import pandas as pd
@@ -7,10 +7,10 @@ from io import StringIO
 
 # Data Sourcing
 
-# Base URL for NYC TLC Yellow Taxi trip data\n",
+# Base URL for NYC TLC Yellow Taxi trip data
 base_url = \"https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_{}-{}.parquet\
     
-# Year and months to download (focusing on the first 3 months of the year)\n",
+# Year and months to download (focusing on the first 3 months of the year),
 year = 2025
 months = ["01", "02", "03"]  # Jan, Feb, Mar
 
