@@ -1,13 +1,16 @@
 # NYC Yellow Taxi Data Project
 CIS 9440 - NYC Yellow Taxi Data Sourcing, Storage, and Modeling
 
-
 ### Project Overview
-This repository holds my work for the assignments where we focused on sourcing, storing, and modeling NYC Yellow Taxi trip data. The dataset includes a lot of useful details about taxi rides across the city such as pickup and dropoff times, locations, fares, and other trip-level information that helps with analysis.
+This repository holds my work for Assignments 1 and 2 of CIS 9440, where I focused on sourcing, storing, transforming, and modeling NYC Yellow Taxi Trip Data (Jan - Mar 2025), and built a cloud-based data warehouse. 
+
+The goal of the project is to learn how to handle real-world data from start to finish, starting with sourcing the raw TLC trip files, storing them in PostgreSQL, transforming and cleaning them, and then modeling the data using a star schema. After building the warehouse locally, the project expands into the cloud by loading the transformed tables into BigQuery and creating a cloud-based version of the data warehouse. Throughout the process, I worked on building Python scripts for sourcing and ETL, creating SQL scripts for the raw, staging, and warehouse layers, designing dimension and fact tables, validating data quality, and documenting the entire pipeline through a data dictionary and data-mapping sheet. Altogether, this project demonstrates how raw trip data becomes structured, validated, and ready for analytics across both local and cloud environments.
 
 ### Data Source
 The data is sourced from the official NYC Taxi & Limousine Commission (TLC):
 [NYC TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
+
+# Assignment 1
 
 ## Data Sourcing
 I handled the data sourcing part of the project in Python. My script pulls the January–March 2025 Parquet files straight from the TLC website and then loads them into my PostgreSQL database through pgAdmin 4. This let me bring in the raw data quickly and keep everything in one place for the modeling steps.
@@ -31,12 +34,55 @@ The repository includes separate SQL files for each step:
 
 * load_fact_taxi_trips.sql – Builds the fact table by joining to dimension surrogate keys
 
+# Assignment 2
+
+This assignment expanded the pipeline to include full transformation, data validation, and loading into a Cloud Data Warehouse (Google BigQuery).
+
+## Transformation
+All transformations were conducted in PostgreSQL through SQL. The following data cleaning steps were taken:
+* standardized timestamp formats
+* ensured numeric columns had correct data types
+* normalized categorical fields
+* handled missing or invalid values
+
+Next, I performed the following data validation steps:
+* Removed any trips with negative distance or fares
+* validated location IDS against the TLC lookup table downloaded from the TLC website
+* filtered passenger counts that fell under 1-6
+* ensured valid datetimes
+* performed deduplication to keep the most recent records
+* added derived columns (including trip_duration_min, tip_percent, extra_charges, total_amount_no_mta_tax)
+
+## Cloud Data Warehouse (Google Cloud BigQuery)
+For the cloud Datawarehouse requirement, the transformed dimensional tables and fact table were exported from PostgreSQL and loaded into Google Cloud's BigQuery.
+
+The BigQuery Dataset created:
+Dataset name: dw
+Project: cis9440-taxi-dw
+
+Tables that were loaded into BigQuery include:
+* dw.dim_datetime
+* dw.dim_location
+* dw.dim_ratecode
+* dw.dim_payment_type
+* dw.dim_vendor
+* dw.dim_store_and_fwd_flag
+* dw.fact_taxi_trips
+
+A python ETL script was created for moving data from the local PostgreSQL warehouse to the BigQuery cloud warehouse. This script loads each dw table from PostgreSQL into BigQuery using BigQuery Python Client. 
+
+## Scripts used for these steps:
+* Transformation Script: Transformation.sql
+*	BigQuery DDL: create_dw_tables_bigquery.sql
+*	ETL Script: load_postgres_to_bigquery.py
+
+
 ## Tools Used
 
-* Python (specifically by using requests, pandas, pyarrow, psycopg2 libraries)
+* Python (specifically by using requests, pandas, pyarrow, psycopg2, sqlalchemy, google-cloud-bigquery, dotenv libraries)
 
-* PostgreSQL (via pgAdmin 4)
+* SQL (via pgAdmin 4 and BigQuery SQL)
+
+* Google BigQuery (Cloud Data Warehouse)
 
 * GitHub
-
-* SQL for all modeling and transformation steps
