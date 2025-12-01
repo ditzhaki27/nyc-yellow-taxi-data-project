@@ -77,7 +77,7 @@ A python ETL script was created for moving data from the local PostgreSQL wareho
 *	ETL Script: load_postgres_to_bigquery.py
 
 
-## Tools Used
+# Tools Used
 
 * Python (specifically by using requests, pandas, pyarrow, psycopg2, sqlalchemy, google-cloud-bigquery, dotenv libraries)
 
