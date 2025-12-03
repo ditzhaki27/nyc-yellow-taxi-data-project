@@ -76,6 +76,7 @@ A python ETL script was created for moving data from the local PostgreSQL wareho
 * Transformation Script: Transformation.sql
 *	BigQuery DDL: create_dw_tables_bigquery.sql
 *	ETL Script: load_postgres_to_bigquery.py
+*	API Python Script: API.py
 
 ## Dashoards for Datasets
 
