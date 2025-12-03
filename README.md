@@ -68,6 +68,7 @@ Tables that were loaded into BigQuery include:
 * dw.dim_vendor
 * dw.dim_store_and_fwd_flag
 * dw.fact_taxi_trips
+* dw.sampled_taxi_data
 
 A python ETL script was created for moving data from the local PostgreSQL warehouse to the BigQuery cloud warehouse. This script loads each dw table from PostgreSQL into BigQuery using BigQuery Python Client. 
 
@@ -75,6 +76,15 @@ A python ETL script was created for moving data from the local PostgreSQL wareho
 * Transformation Script: Transformation.sql
 *	BigQuery DDL: create_dw_tables_bigquery.sql
 *	ETL Script: load_postgres_to_bigquery.py
+
+## Dashoards for Datasets
+
+For the visualization component, I connected Tableau directly to my BigQuery data warehouse. Since my warehouse contains all the cleaned and transformed NYC Yellow Taxi data for January through March 2025, this allowed me to build visualizations using the live data stored in BigQuery instead of relying on local files or extracts. I used Tableau’s built-in BigQuery connector, authenticated with my Google Cloud project, and created a custom SQL query to pull the fields needed for analysis.
+
+Once connected, I built several interactive visuals that reflect the structure of my warehouse, including a line chart of daily trip volume, a column chart comparing boroughs, a pie chart showing payment type distribution, and a heat map summarizing trip density by hour and day of week. I also added a date filter so users can adjust the time window and automatically update the charts. This setup demonstrates that my data flows all the way from the warehouse into Tableau and supports interactive, real-time analysis.
+
+* Tableau Dashboard Link: [Tableau Dashboard - Taxi Dataset](https://public.tableau.com/views/TableauTaxiDataset/Dashboard1?:language=en-GB&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+* Quick Sight Dashboard Link: https://us-east-2.quicksight.aws.amazon.com/sn/accounts/252056599601/dashboards/5c98a137-0320-4f2f-9622-e3e1990187fa?directory_alias=cis9440-ditzhaki 
 
 
 # Tools Used
