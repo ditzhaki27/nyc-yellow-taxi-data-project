@@ -97,3 +97,9 @@ Once connected, I built several interactive visuals that reflect the structure o
 * Google BigQuery (Cloud Data Warehouse)
 
 * GitHub
+
+* Amazon S3
+
+* Amazon Quick Sight
+
+* Tableau
